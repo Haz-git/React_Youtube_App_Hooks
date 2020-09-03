@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
 import Searchbar from './Searchbar';
-import axios from 'axios';
+import Youtube from '../apis/Youtube';
+import VideoList from './VideoList';
 
 const App = () => {
 
-    const [ ytRequest, setYtRequest ] = useState('');
+    const [ ytRequest, setYtRequest ] = useState([]);
 
     const handleApiRequest = (term) => {
         const youtubeRequest = async () => {
-            const response = await axios.get('/search', {
+            const response = await Youtube.get('/search', {
                 params: {
                     q: term,
                 }
             })
+
             console.log(response.data.items);
             setYtRequest(response.data.items);
         }
+
+        youtubeRequest();
     }
     
     return (
         <div>
             <Searchbar requestHandler={handleApiRequest} />
+            <VideoList ytResponse={ytRequest} />
         </div>
     )
 }

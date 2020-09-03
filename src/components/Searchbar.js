@@ -5,13 +5,11 @@ const Searchbar = ({ requestHandler }) => {
 
     const handleOnChange = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
         setSearchResults(e.target.value);
     }
 
     const handleSearch = (e) => {
         e.preventDefault();
-        console.log('Form submitted')
         requestHandler(searchResults);
     }
 
